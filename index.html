@@ -8,13 +8,12 @@
 <style>
   :root {
     --bg: #0c1118; --panel: #141b25; --panel-2: #1b2431; --line: #263243;
-    --text: #e8edf4; --muted: #9aa8ba; --live: #ff4d4f; --ok: #3ecf8e;
-    --a: #2ec4b6; --b: #f4a236; --radius: 14px;
+    --text: #e8edf4; --muted: #9aa8ba; --live: #ff4d4f; --radius: 14px;
   }
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
   body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
   a { color: inherit; }
+  img { max-width: 100%; height: auto; display: block; }
   .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
   header.top { display: flex; align-items: center; justify-content: space-between; padding: 22px 0; }
   .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 22px; letter-spacing: .2px; }
@@ -27,58 +26,11 @@
   h2 { font-size: clamp(22px, 3vw, 30px); margin: 0 0 8px; letter-spacing: -.3px; }
   section { padding: 44px 0; border-top: 1px solid var(--line); }
   section > p.sub { color: var(--muted); margin: 0 0 22px; max-width: 70ch; }
-  .note { color: var(--muted); font-size: 13px; margin-top: 10px; }
-
-  /* ---- The sample stream ---- */
-  .stage { container-type: inline-size; position: relative; aspect-ratio: 16 / 9; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line);
-    background: radial-gradient(120% 90% at 50% 110%, #24384a 0%, #131d29 55%, #0b1017 100%); }
-  .stage::before { content: ""; position: absolute; inset: 0; opacity: .25;
-    background: linear-gradient(transparent 96%, #3a516a 96%) 0 0 / 100% 9%, linear-gradient(90deg, transparent 97%, #3a516a 97%) 0 0 / 6% 100%; transform: perspective(60cqw) rotateX(58deg) translateY(18%); transform-origin: 50% 100%; }
-  .cap { position: absolute; left: 50%; top: 56%; transform: translate(-50%, -50%); color: #6f8198; font-size: 1.6cqw; letter-spacing: .3cqw; text-transform: uppercase; }
-  .bar { position: absolute; top: 2.4cqw; left: 50%; transform: translateX(-50%); display: flex; align-items: stretch; gap: .5cqw; font-size: 1.7cqw; }
-  .team { display: flex; align-items: center; gap: .9cqw; background: rgba(12,17,24,.9); border-radius: 1cqw; padding: .7cqw 1.2cqw; min-width: 21cqw; }
-  .team.right { flex-direction: row-reverse; text-align: right; }
-  .badge { width: 3.6cqw; height: 3.6cqw; border-radius: .8cqw; display: grid; place-items: center; font-weight: 800; font-size: 1.25cqw; color: #08110f; }
-  .team.left .badge { background: var(--a); } .team.right .badge { background: var(--b); }
-  .tname { font-weight: 700; line-height: 1.1; } .tname small { display: block; font-weight: 500; color: var(--muted); font-size: 1.05cqw; }
-  .pips { display: flex; gap: .35cqw; margin-top: .3cqw; } .team.right .pips { justify-content: flex-end; }
-  .pip { width: 1.5cqw; height: .45cqw; border-radius: 1cqw; background: #2c3a4d; } .team.left .pip.on { background: var(--a); } .team.right .pip.on { background: var(--b); }
-  .score { margin-left: auto; font-size: 3.2cqw; font-weight: 800; font-variant-numeric: tabular-nums; } .team.right .score { margin-left: 0; margin-right: auto; }
-  .mid { background: rgba(12,17,24,.9); border-radius: 1cqw; padding: .5cqw 1.6cqw; text-align: center; min-width: 11cqw; display: grid; align-content: center; }
-  .mid .clock { font-size: 2.6cqw; font-weight: 800; font-variant-numeric: tabular-nums; line-height: 1; }
-  .mid .round { color: var(--muted); font-size: 1.05cqw; letter-spacing: .15cqw; text-transform: uppercase; margin-top: .3cqw; }
-  .mid.spike .clock { color: var(--live); }
-  .cards { position: absolute; bottom: 2.4cqw; display: grid; gap: .5cqw; width: 22cqw; font-size: 1.2cqw; }
-  .cards.left { left: 2cqw; } .cards.right { right: 2cqw; }
-  .card { position: relative; background: rgba(12,17,24,.88); border-radius: .8cqw; padding: .55cqw .9cqw .75cqw; display: flex; justify-content: space-between; gap: 1cqw; overflow: hidden; }
-  .card b { font-weight: 700; } .card span { color: var(--muted); font-variant-numeric: tabular-nums; }
-  .card i { position: absolute; left: 0; bottom: 0; height: .3cqw; background: var(--a); transition: width .5s ease; } .cards.right .card i { background: var(--b); left: auto; right: 0; }
-  .card.out { opacity: .42; }
-  .history { position: absolute; top: 9.6cqw; left: 50%; transform: translateX(-50%); display: flex; gap: .35cqw; }
-  .history u { width: 1.25cqw; height: 1.25cqw; border-radius: 50%; background: #253142; display: block; text-decoration: none; }
-  .history u.a { background: var(--a); } .history u.b { background: var(--b); }
-  .banner { position: absolute; left: 50%; top: 30%; transform: translate(-50%, -50%) scale(.96); background: rgba(12,17,24,.94); border: 1px solid var(--line); border-radius: 1.2cqw; padding: 1.2cqw 2.6cqw; font-size: 2.1cqw; font-weight: 700; opacity: 0; transition: opacity .35s ease, transform .35s ease; text-align: center; }
-  .banner small { display: block; font-size: 1.15cqw; color: var(--muted); font-weight: 500; letter-spacing: .15cqw; text-transform: uppercase; }
-  .banner.show { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-
-  /* ---- The operator window ---- */
-  .window { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
-  .chrome { display: flex; align-items: center; gap: 8px; padding: 10px 14px; border-bottom: 1px solid var(--line); color: var(--muted); font-size: 13px; }
-  .chrome span { width: 10px; height: 10px; border-radius: 50%; background: #2c3a4d; }
-  .app { display: grid; grid-template-columns: 190px 1fr; min-height: 320px; }
-  .steps { border-right: 1px solid var(--line); padding: 14px; display: grid; gap: 6px; align-content: start; font-size: 14px; }
-  .steps div { padding: 8px 10px; border-radius: 8px; color: var(--muted); } .steps .now { background: var(--panel-2); color: var(--text); font-weight: 600; }
-  .main { padding: 18px; display: grid; gap: 14px; align-content: start; }
-  .status { display: flex; flex-wrap: wrap; gap: 8px; }
-  .status span { font-size: 13px; padding: 4px 10px; border-radius: 999px; background: var(--panel-2); border: 1px solid var(--line); }
-  .status span::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--ok); margin-right: 7px; }
-  .teams { display: grid; grid-template-columns: 1fr auto 1fr; gap: 12px; align-items: stretch; }
-  .tcard { background: var(--panel-2); border: 1px solid var(--line); border-radius: 12px; padding: 14px; display: grid; gap: 6px; }
-  .tcard label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .6px; }
-  .field { background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; font-size: 14px; }
-  .swap { align-self: center; border: 1px solid var(--line); background: var(--panel-2); color: var(--text); border-radius: 10px; padding: 10px 12px; font-size: 13px; }
-  .go { justify-self: start; background: var(--live); color: #fff; border: 0; border-radius: 10px; padding: 11px 20px; font-weight: 700; font-size: 15px; }
-
+  figure { margin: 0; }
+  figure a { display: block; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--panel); }
+  figcaption { color: var(--muted); font-size: 13px; margin-top: 10px; }
+  figcaption b { color: var(--text); font-weight: 600; }
+  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
   .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
   .box { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; }
   .box h3 { margin: 0 0 10px; font-size: 17px; } .box ul { margin: 0; padding-left: 18px; color: var(--muted); } .box li { margin: 6px 0; } .box li b { color: var(--text); font-weight: 600; }
@@ -88,13 +40,11 @@
   .flow div:not(:last-child)::after { content: "→"; position: absolute; right: -11px; top: 50%; transform: translateY(-50%); color: var(--muted); z-index: 1; }
   footer { border-top: 1px solid var(--line); padding: 26px 0 40px; color: var(--muted); font-size: 13px; }
   footer p { margin: 0 0 8px; max-width: 90ch; }
-
   @media (max-width: 760px) {
-    .app { grid-template-columns: 1fr; } .steps { grid-auto-flow: column; overflow-x: auto; border-right: 0; border-bottom: 1px solid var(--line); }
-    .teams, .cols, .flow { grid-template-columns: 1fr; } .swap { justify-self: center; }
+    .pair, .cols, .flow { grid-template-columns: 1fr; }
     .flow div:not(:last-child)::after { content: "↓"; right: 50%; top: auto; bottom: -15px; transform: translateX(50%); }
   }
-  @media (prefers-reduced-motion: reduce) { .dot { animation: none; } .card i, .banner { transition: none; } }
+  @media (prefers-reduced-motion: reduce) { .dot { animation: none; } }
 </style>
 </head>
 <body>
@@ -108,39 +58,25 @@
   <p class="lede">OnAir is a desktop tool for a school's stream operator. It puts team names, logos, the series score and live match graphics on the school's stream through OBS, and keeps them right while the match is played.</p>
   <div class="pills"><span class="tag">Built on Overwolf Electron</span><span class="tag">Works with OBS</span><span class="tag">Windows</span></div>
 
-  <div class="stage" id="stage" role="img" aria-label="Sample of the OnAir overlay on a stream: a score bar with two made-up teams, a round clock, round history and player cards.">
-    <div class="cap">Game capture · observer view</div>
-    <div class="bar">
-      <div class="team left"><div class="badge">NGU</div><div class="tname">Northgate<small>Attacking</small><div class="pips"><span class="pip on"></span><span class="pip"></span></div></div><div class="score" id="sa">0</div></div>
-      <div class="mid" id="mid"><div class="clock" id="clock">1:40</div><div class="round" id="round">Round 1</div></div>
-      <div class="team right"><div class="badge">RDG</div><div class="tname">Ridgeline<small>Defending</small><div class="pips"><span class="pip"></span><span class="pip"></span></div></div><div class="score" id="sb">0</div></div>
-    </div>
-    <div class="history" id="history"></div>
-    <div class="cards left" id="ca"></div>
-    <div class="cards right" id="cb"></div>
-    <div class="banner" id="banner"></div>
-  </div>
-  <p class="note">Sample only: made-up teams, players and numbers, playing on a loop. On a real stream the picture behind the overlay is the tournament observer's view of the match.</p>
+  <figure>
+    <a href="img/overlay-valorant.jpg"><img src="img/overlay-valorant.jpg" width="1920" height="1080" alt="The OnAir VALORANT overlay over a match: a score bar with two teams and the round number at the top, the series maps in the corner, and a card for each of the ten players down both sides with agent, weapon, shield and score."></a>
+    <figcaption><b>The VALORANT overlay as it appears on a stream.</b> A sample match: the score bar, series maps and player cards are drawn by OnAir over the tournament observer's view of the game. The player names on the cards are made up.</figcaption>
+  </figure>
 
   <section>
     <h2>One window for the operator</h2>
-    <p class="sub">The operator sets up the two teams and the series, checks that everything is connected, and goes live. During the match OnAir keeps the overlay in step with the game, and the operator can swap sides, call a timeout graphic or correct a score.</p>
-    <div class="window" aria-label="Preview of the OnAir operator window">
-      <div class="chrome"><span></span><span></span><span></span>&nbsp; OnAir · VALORANT</div>
-      <div class="app">
-        <div class="steps"><div class="now">1 · Teams &amp; series</div><div>2 · Add-ons</div><div>3 · Cameras</div><div>4 · Go live</div></div>
-        <div class="main">
-          <div class="status"><span>Game reader ready</span><span>Overlay connected</span><span>OBS connected</span></div>
-          <div class="teams">
-            <div class="tcard"><label>Left team</label><div class="field">Northgate University</div><div class="field">NGU</div></div>
-            <button class="swap" type="button" tabindex="-1">⇄ Swap</button>
-            <div class="tcard"><label>Right team</label><div class="field">Ridgeline College</div><div class="field">RDG</div></div>
-          </div>
-          <button class="go" type="button" tabindex="-1">Go live</button>
-        </div>
-      </div>
+    <p class="sub">The operator sets up the two teams and the series, checks that everything is connected, and goes live. During the match OnAir keeps the overlay in step with the game, and the operator can swap sides, show a timeout or correct a score.</p>
+    <div class="pair">
+      <figure>
+        <a href="img/operator-live.jpg"><img src="img/operator-live.jpg" width="1440" height="900" loading="lazy" alt="The OnAir operator window during a VALORANT match: status of the game, game data, overlay, OBS and cameras; the score and round; maps of the series; timeout and pause buttons; camera and on-screen options; a preview of what viewers see and a list of what just happened."></a>
+        <figcaption><b>Live.</b> Score, maps, timeouts, cameras and what viewers see, with an undo for the last action.</figcaption>
+      </figure>
+      <figure>
+        <a href="img/operator-setup.jpg"><img src="img/operator-setup.jpg" width="1440" height="900" loading="lazy" alt="The OnAir operator window while setting up a VALORANT match: four steps (teams, match, cameras, go live), a left and right team with name, short code, logo and colour, a swap button and a preview."></a>
+        <figcaption><b>Set-up.</b> Four steps: teams, match, cameras, go live.</figcaption>
+      </figure>
     </div>
-    <p class="note">Design preview of the operator window. The tool is in use today; this layout is in development.</p>
+    <p class="sub" style="margin:18px 0 0">These two pictures show the new design of the operator window, which is in development. The tool is in use today with an earlier layout.</p>
   </section>
 
   <section>
@@ -187,84 +123,8 @@
 
   <footer>
     <p>OnAir isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone officially involved in producing or managing Riot Games properties. Riot Games, and all associated properties are trademarks or registered trademarks of Riot Games, Inc.</p>
-    <p>Other names are the property of their owners. The teams, players and numbers shown on this page are made up.</p>
+    <p>Other names and logos are the property of their owners. Player names shown on the overlay are made up.</p>
   </footer>
 </div>
-
-<script>
-(function () {
-  var names = { a: ["Kestrel", "Juno", "Brick", "Mako", "Sable"], b: ["Onyx", "Pip", "Vale", "Rook", "Tansy"] };
-  var $ = function (id) { return document.getElementById(id); };
-  var state, timer;
-  function fresh() {
-    state = { round: 1, sa: 0, sb: 0, clock: 100, spike: false, history: [], players: { a: [], b: [] } };
-    ["a", "b"].forEach(function (side) {
-      state.players[side] = names[side].map(function (name) { return { name: name, k: 0, d: 0, a: 0, hp: 100 }; });
-    });
-  }
-  function cards(side) {
-    $("c" + side).innerHTML = state.players[side].map(function (p) {
-      return '<div class="card' + (p.hp ? "" : " out") + '"><b>' + p.name + "</b><span>" + p.k + " / " + p.d + " / " + p.a + '</span><i style="width:' + p.hp + '%"></i></div>';
-    }).join("");
-  }
-  function draw() {
-    $("sa").textContent = state.sa; $("sb").textContent = state.sb;
-    var s = Math.max(0, state.clock);
-    $("clock").textContent = Math.floor(s / 60) + ":" + ("0" + (s % 60)).slice(-2);
-    $("round").textContent = state.spike ? "Spike planted" : "Round " + state.round;
-    $("mid").className = "mid" + (state.spike ? " spike" : "");
-    var dots = "";
-    for (var i = 0; i < 12; i++) dots += '<u class="' + (state.history[i] || "") + '"></u>';
-    $("history").innerHTML = dots;
-    cards("a"); cards("b");
-  }
-  function banner(title, small, ms) {
-    var el = $("banner");
-    el.innerHTML = "<small>" + small + "</small>" + title;
-    el.className = "banner show";
-    setTimeout(function () { el.className = "banner"; }, ms);
-  }
-  function alive(side) { return state.players[side].filter(function (p) { return p.hp > 0; }); }
-  function endRound(winner) {
-    state[winner === "a" ? "sa" : "sb"]++;
-    state.history.push(winner);
-    banner(winner === "a" ? "Northgate win the round" : "Ridgeline win the round", "Round " + state.round, 1800);
-    draw();
-    clearInterval(timer);
-    setTimeout(function () {
-      if (state.history.length >= 12) fresh();
-      else {
-        state.round++; state.clock = 100; state.spike = false;
-        ["a", "b"].forEach(function (side) { state.players[side].forEach(function (p) { p.hp = 100; }); });
-        if (state.round === 5) banner("Timeout — Ridgeline", "Tactical timeout", 2200);
-      }
-      draw(); run();
-    }, 2600);
-  }
-  function tick() {
-    state.clock -= state.spike ? 3 : 7;
-    if (Math.random() < 0.75) {
-      var from = Math.random() < 0.5 ? "a" : "b", to = from === "a" ? "b" : "a";
-      var shooters = alive(from), targets = alive(to);
-      if (shooters.length && targets.length) {
-        var s = shooters[Math.floor(Math.random() * shooters.length)], t = targets[Math.floor(Math.random() * targets.length)];
-        t.hp = Math.max(0, t.hp - (40 + Math.floor(Math.random() * 70)));
-        if (!t.hp) { s.k++; t.d++; var helper = shooters[Math.floor(Math.random() * shooters.length)]; if (helper !== s) helper.a++; }
-      }
-    }
-    if (!state.spike && state.clock < 55 && alive("a").length && Math.random() < 0.35) { state.spike = true; state.clock = 45; }
-    draw();
-    if (!alive("a").length) return endRound("b");
-    if (!alive("b").length) return endRound("a");
-    if (state.clock <= 0) return endRound(state.spike ? "a" : "b");
-  }
-  function run() { timer = setInterval(tick, 900); }
-  fresh(); draw();
-  if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    // A still picture for anyone who has asked their device for less motion.
-    state.round = 7; state.sa = 4; state.sb = 2; state.clock = 72; state.history = ["a", "b", "a", "a", "b", "a"]; draw();
-  } else run();
-})();
-</script>
 </body>
 </html>
