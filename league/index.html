@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OnAir for League of Legends — concept preview</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230c1118'/%3E%3Ccircle cx='16' cy='16' r='7' fill='%23ff4d4f'/%3E%3C/svg%3E">
+<meta name="description" content="A concept preview of OnAir for League of Legends: broadcast graphics for college and high school esports streams, run by one operator. The pictures are mock-ups, not a finished product.">
+<style>
+  :root {
+    --bg: #0c1118; --panel: #141b25; --panel-2: #1b2431; --line: #263243;
+    --text: #e8edf4; --muted: #9aa8ba; --live: #ff4d4f; --radius: 14px;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+  a { color: inherit; }
+  img { max-width: 100%; height: auto; display: block; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+  header.top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 22px 0; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 22px; letter-spacing: .2px; text-decoration: none; }
+  .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--live); box-shadow: 0 0 0 0 rgba(255,77,79,.6); animation: pulse 2s infinite; }
+  @keyframes pulse { 70% { box-shadow: 0 0 0 10px rgba(255,77,79,0); } 100% { box-shadow: 0 0 0 0 rgba(255,77,79,0); } }
+  .tag { font-size: 13px; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; }
+  .notice { background: #2a1517; border: 1px solid #5a2226; color: #fecaca; border-radius: var(--radius); padding: 12px 16px; font-size: 15px; margin: 4px 0 0; }
+  .notice b { color: #fff; }
+  h1 { font-size: clamp(30px, 5vw, 50px); line-height: 1.08; margin: 26px 0 14px; letter-spacing: -.5px; max-width: 18ch; }
+  .lede { color: var(--muted); font-size: clamp(16px, 2vw, 19px); max-width: 62ch; margin: 0 0 18px; }
+  .pills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 30px; }
+  h2 { font-size: clamp(22px, 3vw, 30px); margin: 0 0 8px; letter-spacing: -.3px; }
+  section { padding: 44px 0; border-top: 1px solid var(--line); }
+  section > p.sub { color: var(--muted); margin: 0 0 22px; max-width: 70ch; }
+  figure { margin: 0; }
+  figure a { display: block; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--panel); }
+  figcaption { color: var(--muted); font-size: 13px; margin-top: 10px; }
+  figcaption b { color: var(--text); font-weight: 600; }
+  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .box { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; }
+  .box h3 { margin: 0 0 10px; font-size: 17px; } .box ul { margin: 0; padding-left: 18px; color: var(--muted); } .box li { margin: 6px 0; } .box li b { color: var(--text); font-weight: 600; }
+  .flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .flow div { position: relative; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 16px; font-size: 14px; color: var(--muted); }
+  .flow b { display: block; color: var(--text); margin-bottom: 4px; font-size: 15px; }
+  .flow div:not(:last-child)::after { content: "→"; position: absolute; right: -11px; top: 50%; transform: translateY(-50%); color: var(--muted); z-index: 1; }
+  footer { border-top: 1px solid var(--line); padding: 26px 0 40px; color: var(--muted); font-size: 13px; }
+  footer p { margin: 0 0 8px; max-width: 90ch; }
+  @media (max-width: 760px) {
+    .pair, .cols, .flow { grid-template-columns: 1fr; }
+    .flow div:not(:last-child)::after { content: "↓"; right: 50%; top: auto; bottom: -15px; transform: translateX(50%); }
+  }
+  @media (prefers-reduced-motion: reduce) { .dot { animation: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="../"><span class="dot" aria-hidden="true"></span>OnAir</a>
+    <span class="tag">League of Legends · concept preview</span>
+  </header>
+
+  <p class="notice"><b>Not a finished product.</b> The pictures on this page are mock-ups that show what OnAir for League of Legends could look like. Teams, players and numbers are made up, and the design may change.</p>
+
+  <h1>League of Legends broadcasts for schools, run by one operator.</h1>
+  <p class="lede">OnAir is a desktop app for the person running a school's stream. Most college and high school programs have one person on the broadcast and no production crew. OnAir puts team names, logos, the series score and live match graphics on the school's stream through OBS, and keeps them right while the match is played.</p>
+  <div class="pills"><span class="tag">Built on Overwolf Electron</span><span class="tag">Works with OBS</span><span class="tag">Windows</span><span class="tag">College and high school</span></div>
+
+  <figure>
+    <a href="../img/league-overlay.jpg"><img src="../img/league-overlay.jpg" width="1920" height="1080" alt="Mock-up of the OnAir League of Legends graphics over a match: a score bar at the top centre with both schools, kills, towers, dragons, team gold and the game clock; a table along the bottom with a row for each lane showing both players' champion, level, kills, deaths and assists, creep score, gold, items and summoner spells; objective timers in the top-left corner; and the match title and a sponsor slot in the bottom-left corner. The game's own minimap is in the bottom-right corner. A red label reads mock-up, not a finished product."></a>
+    <figcaption><b>During the match (mock-up).</b> The score bar, the ten-player table, objective timers and the match title are drawn by OnAir over the tournament observer's view of the game. The game's own minimap stays on screen. The teams, players and numbers are made up.</figcaption>
+  </figure>
+
+  <section>
+    <h2>Before and after the game</h2>
+    <p class="sub">The broadcast does not stop when the game does. OnAir carries the stream through champion select and shows a summary when the game ends.</p>
+    <div class="pair">
+      <figure>
+        <a href="../img/league-draft.jpg"><img src="../img/league-draft.jpg" width="1920" height="1080" loading="lazy" alt="Mock-up of a champion select screen: both schools with their picks and player names by position, the timer and whose turn it is, each team's bans, and the champions already played earlier in the series. Labelled mock-up, not a finished product."></a>
+        <figcaption><b>Champion select (mock-up).</b> Picks, bans and the timer as they happen, with the champions already played in the series.</figcaption>
+      </figure>
+      <figure>
+        <a href="../img/league-postgame.jpg"><img src="../img/league-postgame.jpg" width="1920" height="1080" loading="lazy" alt="Mock-up of a post-game summary: the winning school and series score, team totals for kills, gold, towers, dragons, barons and inhibitors, and a table of all ten players with champion, kills, deaths and assists, creep score, gold and damage. Labelled mock-up, not a finished product."></a>
+        <figcaption><b>Post-game summary (mock-up).</b> The result, team totals and all ten players.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section>
+    <h2>The desktop app</h2>
+    <p class="sub">The operator sets up the two teams and the series in the OnAir desktop app, checks that everything is connected, and goes live. During the match the desktop app keeps the graphics in step with the game, and the operator can fix a missed objective, correct the series score or change what is on screen.</p>
+    <figure>
+      <a href="../img/league-desktop.jpg"><img src="../img/league-desktop.jpg" width="1440" height="900" loading="lazy" alt="Mock-up of the OnAir desktop app during a League of Legends match: a list of games, status of the game, game data, overlay, OBS and cameras; the score and game clock; controls to correct objectives; switches for what is on screen; a preview of what viewers see and a list of what just happened. Labelled mock-up, not a finished product."></a>
+      <figcaption><b>The desktop app during a match (mock-up).</b> Status, score, objective corrections, what is on screen, and what viewers see.</figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <h2>Where the information comes from, and what OnAir does not do</h2>
+    <p class="sub">For League of Legends, OnAir reads the match on the tournament observer's PC, with the game in spectator mode. It uses Overwolf's game events, Riot's Live Client Data and Replay APIs, and the League client for champion select. It does not use the Riot web API.</p>
+    <div class="cols">
+      <div class="box">
+        <h3>Shown on the broadcast</h3>
+        <ul>
+          <li><b>The match:</b> kills, towers, objectives and the game clock.</li>
+          <li><b>The ten players:</b> name, champion, level, kills, deaths and assists, creep score, items, summoner spells and death timers.</li>
+          <li><b>Champion select:</b> picks and bans as they happen.</li>
+          <li><b>After the game:</b> a summary of the result.</li>
+          <li><b>Gold and summoner spell timers</b> are in these mock-ups to show the idea. They will be on a broadcast only from a source Riot approves.</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h3>Never</h3>
+        <ul>
+          <li><b>Shown to players.</b> The graphics are on the broadcast only and give no in-game advantage.</li>
+          <li><b>Run on a player's PC.</b> OnAir runs only on the observer's PC.</li>
+          <li><b>Sent to an outside server.</b> Everything stays on the stream PC and goes out only as the picture on the stream.</li>
+          <li><b>Kept as player statistics.</b> No profiles, rankings, ratings or scouting.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>How it fits together</h2>
+    <p class="sub">Everything runs on the school's own PCs.</p>
+    <div class="flow">
+      <div><b>Match</b>The tournament observer watches the match in spectator mode.</div>
+      <div><b>Match information</b>Read on the observer's PC, through Overwolf and the game's own local data.</div>
+      <div><b>OnAir</b>The desktop app turns it into broadcast graphics.</div>
+      <div><b>OBS → stream</b>OBS shows the graphics over the observer's view.</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Status</h2>
+    <p class="sub">OnAir for League of Legends is in development. This page is a concept preview: the pictures are mock-ups, not a finished product. OnAir is in use today on live collegiate esports broadcasts; the <a href="../">main OnAir page</a> shows its VALORANT overlay.</p>
+  </section>
+
+  <footer>
+    <p>OnAir isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone officially involved in producing or managing Riot Games properties. Riot Games, and all associated properties are trademarks or registered trademarks of Riot Games, Inc.</p>
+    <p>Other names and logos are the property of their owners. The teams, player names and numbers shown in the mock-ups are made up.</p>
+  </footer>
+</div>
+</body>
+</html>
